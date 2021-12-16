@@ -3,14 +3,18 @@ const boardContext = gameCanvas.getContext("2d");
 const newGameButton = document.getElementById('new-game');
 const scoreBoard = document.getElementById('score');
 const higherScore = document.querySelector('#highest-score span');
+const bodySelector = document.querySelector('body');
+const headingElement = document.createElement('h2');
+const gameoverPrompt = headingElement.innerHTML = 'You lost the game. Press ENTER or click on new game to restart a game.';
 
+headingElement.id = 'gameover-text';
+
+let gameOverSound = new sound("gameover.mp3");
+let eatAppleSound = new sound("eatapple.mp3");
 let myMusic;
 myMusic = new sound("snakemusic.mp3");
 document.querySelector('audio').loop = true;
 myMusic.play();
-
-let gameOverSound = new sound("gameover.mp3");
-let eatAppleSound = new sound("eatapple.mp3");
 
 let snake = [
     { x: 200, y: 200 },
@@ -32,8 +36,8 @@ let food_y;
 function drawSnakeParts(snakePos) {
     boardContext.fillStyle = '#8bc34a';
     boardContext.strokestyle = 'darkblue';
-    boardContext.fillRect(snakePos.x, snakePos.y, 10, 10); //Draws a filled rectangle.
-    boardContext.strokeRect(snakePos.x, snakePos.y, 10, 10); //Draws a rectangular outline. 
+    boardContext.fillRect(snakePos.x, snakePos.y, 10, 10);
+    boardContext.strokeRect(snakePos.x, snakePos.y, 10, 10);
 }
 
 // Function to draw the snake 
@@ -102,7 +106,9 @@ function change_direction(event) {
 function has_game_ended() {
     for (let i = 4; i < snake.length; i++) {
         if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+            document.querySelector('audio').loop = false;
             gameOverSound.play();
+            bodySelector.appendChild(headingElement);
             return true;
         }
     }
@@ -112,7 +118,9 @@ function has_game_ended() {
     const hitBottomWall = snake[0].y > board.height - 10;
 
     if (hitLeftWall || hitRightWall || hitToptWall || hitBottomWall) {
+        document.querySelector('audio').loop = false;
         gameOverSound.play();
+        bodySelector.appendChild(headingElement);
         return true;
     }
 }
@@ -134,8 +142,8 @@ function gen_food() {
 
 // Function to draw the food
 function drawFood() {
-    boardContext.fillStyle = 'lightgreen';
-    boardContext.strokestyle = 'darkgreen';
+    boardContext.fillStyle = 'red';
+    boardContext.strokestyle = 'black';
     boardContext.fillRect(food_x, food_y, 10, 10);
     boardContext.strokeRect(food_x, food_y, 10, 10);
 }
@@ -148,7 +156,6 @@ function main() {
         }
         return;
     }
-
     changing_direction = false;
     setTimeout(function onTick() {
         clearCanvas();
@@ -183,6 +190,8 @@ function newGame() {
         { x: 160, y: 200 },
         { x: 150, y: 200 }
     ]
+    myMusic.play();
+    document.getElementById('gameover-text').remove();
     score = 0;
     scoreBoard.innerHTML = `Score : ${score}`;
     food_x;
@@ -198,3 +207,9 @@ main();
 gen_food();
 document.addEventListener("keydown", change_direction);
 newGameButton.addEventListener("click", newGame);
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        newGame();
+    }
+})

@@ -1,4 +1,6 @@
-canvas {
+@import url(https://fonts.googleapis.com/css?family=Bangers);
+
+  canvas {
     border: 3px solid black;
   }
 
@@ -11,17 +13,149 @@ canvas {
 
   #score {
     text-align: center;
-    font-size: 140px;
+    font-size: 30px;
+    padding-top: 5px;
   }
 
   #highest-score {
     padding-bottom: 50px;
+    font-size: 30px;
+    padding-left: 10px;
+    text-align: center;
+    padding-top: 5px;
+  }
+
+  #box-container {
+    bottom: 500px;
   }
 
   html {
+    height: 800px;
     background: url('./snakebackground.jpg') no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+  }
+
+  h2 {
+    margin-right: 275px;
+  }
+
+body{
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  font-size: 25px;
+  padding-top: 0;
+}
+
+#button-container {
+  width: 100px;
+  height: 150px;
+  float: left;
+}
+
+.box{
+  margin:25px;
+  width:250px;
+  height:200px;
+  background:#fff;
+  border: solid black;
+  border-color: black;
+  float:left; 
+}
+
+.box1{
+  border-width: 3px 4px 3px 5px;
+  border-radius:95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(2deg);
+}
+.box2{
+  width:250px;
+  border-width: 3px 3px 5px 5px;
+  border-radius:4% 95% 6% 95%/95% 4% 92% 5%;
+  transform: rotate(-2deg);
+}
+
+.box3{
+  border-width: 5px 3px 3px 5px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  transform: rotate(2deg);
+}
+
+.oddboxinner{
+  margin:15px;
+  transform: rotate(-2deg);
+}
+
+.evenboxinner{
+  transform: rotate(2deg);
+  margin:15px;
+  padding:0 5px;
+  float:right;
+  background:#ddd;
+  border:1px solid #222;
+  box-shadow:3px 3px 0 #222;
+}
+
+.game-button.green {
+  background: repeating-linear-gradient( 45deg, #54d440, #54d440 5px, #52cc3f 5px, #52cc3f 10px);
+   box-shadow: 0 6px 0 #348628, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #2a6d20, 0 12px 0 5px #39822e, 0 15px 0 5px #1d4c16, 0 15px 1px 6px rgba(0,0,0,.3);
+   border-bottom: 3px solid rgba(40, 117, 29, 0.5);
+   text-shadow: 2px 2px 1px #348628, -2px 2px 1px #348628, 2px -2px 1px #348628, -2px -2px 1px #348628, 0px 2px 1px #348628, 0px -2px 1px #348628, 0px 4px 1px #1d4c16, 2px 4px 1px #1d4c16, -2px 4px 1px #1d4c16;
+}
+
+.game-button.green:hover {
+ top:480px;
+ box-shadow: 0 4px 0 #348628, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #2a6d20, 0 10px 0 5px #39822e, 0 13px 0 5px #1d4c16, 0 13px 1px 6px rgba(0,0,0,.3);
+}
+
+.game-button {
+  left: 80px;
+  top: 500px;
+  position: absolute;
+  cursor: pointer;
+  text-decoration: none !important;
+  outline: none !important;
+  font-family: 'Carter One', sans-serif;
+  font-size: 20px;
+  line-height: 1.5em;
+  letter-spacing: .1em;
+  text-shadow: 2px 2px 1px #0066a2, -2px 2px 1px #0066a2, 2px -2px 1px #0066a2, -2px -2px 1px #0066a2, 0px 2px 1px #0066a2, 0px -2px 1px #0066a2, 0px 4px 1px #004a87, 2px 4px 1px #004a87, -2px 4px 1px  #004a87;
+  border: none;
+  margin: 15px 15px 30px;
+  background: repeating-linear-gradient( 45deg, #3ebbf7, #3ebbf7 5px, #45b1f4 5px, #45b1f4 10px);
+  border-bottom: 3px solid rgba(16, 91, 146, 0.5);
+  border-top: 3px solid rgba(255,255,255,.3);
+  color: #fff !important;
+  border-radius: 8px;
+  padding: 8px 15px 10px;
+  box-shadow: 0 6px 0 #266b91, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #12517d, 0 12px 0 5px #1a6b9a, 0 15px 0 5px #0c405e, 0 15px 1px 6px rgba(0,0,0,.3);
+}
+
+.game-button:hover {
+  top: 2px;
+  box-shadow: 0 4px 0 #266b91, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #12517d, 0 10px 0 5px #1a6b9a, 0 13px 0 5px #0c405e, 0 13px 1px 6px rgba(0,0,0,.3);
+}
+
+.game-button::before {
+  content: '';
+  height: 10%;
+  position: absolute;
+  width: 40%;
+  background: #fff;
+  right: 13%;
+  top: -3%;
+  border-radius: 99px;
+  }
+
+.game-button::after {
+  content: '';
+  height: 10%;
+  position: absolute;
+  width: 5%;
+  background: #fff;
+  right: 5%;
+  top: -3%;
+  border-radius: 99px;
   }
