@@ -2,11 +2,15 @@ const board = document.getElementById('gameCanvas');
 const boardContext = gameCanvas.getContext("2d");
 const newGameButton = document.getElementById('new-game');
 const scoreBoard = document.getElementById('score');
+const higherScore = document.querySelector('#highest-score span');
+
 let myMusic;
 myMusic = new sound("snakemusic.mp3");
 document.querySelector('audio').loop = true;
 myMusic.play();
 
+let gameOverSound = new sound("gameover.mp3");
+let eatAppleSound = new sound("eatapple.mp3");
 
 let snake = [
     { x: 200, y: 200 },
@@ -42,11 +46,11 @@ function move_snake() {
     snake.unshift(head);
     const has_eaten_food = snake[0].x === food_x && snake[0].y === food_y;
     if (has_eaten_food) {
+        eatAppleSound.play();
         score += 10;
         scoreBoard.innerHTML = `Score : ${score}`;
         gen_food();
     } else {
-        // Remove the last part of snake body
         snake.pop();
     }
 }
@@ -97,14 +101,20 @@ function change_direction(event) {
 // Function to check is the game has ended or not
 function has_game_ended() {
     for (let i = 4; i < snake.length; i++) {
-        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+            gameOverSound.play();
+            return true;
+        }
     }
     const hitLeftWall = snake[0].x < 0;
     const hitRightWall = snake[0].x > board.width - 10;
     const hitToptWall = snake[0].y < 0;
     const hitBottomWall = snake[0].y > board.height - 10;
 
-    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+    if (hitLeftWall || hitRightWall || hitToptWall || hitBottomWall) {
+        gameOverSound.play();
+        return true;
+    }
 }
 
 // Functions to generate a random food on the map
@@ -132,7 +142,13 @@ function drawFood() {
 
 // Function we're calling at each state of the game
 function main() {
-    if (has_game_ended()) return;
+    if (has_game_ended()) {
+        if (score > higherScore.innerHTML) {
+            higherScore.innerHTML = score;
+        }
+        return;
+    }
+
     changing_direction = false;
     setTimeout(function onTick() {
         clearCanvas();
@@ -182,5 +198,3 @@ main();
 gen_food();
 document.addEventListener("keydown", change_direction);
 newGameButton.addEventListener("click", newGame);
-
-
