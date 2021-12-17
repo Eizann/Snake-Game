@@ -67,10 +67,10 @@ function clearCanvas() {
 
 // Function to change the direction of the snake
 function change_direction(event) {
-    const left = 65;
-    const right = 68;
-    const up = 87;
-    const down = 83;
+    const left = 37;
+    const right = 39;
+    const up = 38;
+    const down = 40;
 
     if (changing_direction) return;
     changing_direction = true;
@@ -189,6 +189,7 @@ function newGame() {
         { x: 160, y: 200 },
         { x: 150, y: 200 }
     ]
+    document.querySelector('audio').loop = true;
     myMusic.play();
     if(document.getElementById('gameover-text')) {
         document.getElementById('gameover-text').remove();
@@ -200,14 +201,27 @@ function newGame() {
     changing_direction = false;
     horizontalVelocity = 10;
     verticalVelocity = 0;
+    
     main();
     gen_food();
 }
 
+function onloadText() {
+    boardContext.fillStyle = "black";
+    boardContext.font = "23px Arial";
+    boardContext.fillText("Press ENTER or click on new game.", 20, 100);
+}
 
+window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
+clearCanvas();
+window.onload = onloadText;
 document.addEventListener("keydown", change_direction);
 newGameButton.addEventListener("click", newGame);
-
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         newGame();

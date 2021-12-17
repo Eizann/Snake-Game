@@ -39,7 +39,11 @@
   }
 
   h2 {
-    margin-right: 275px;
+    width: 150px;
+    font-size: 30px;
+    top: 170px;
+    position: absolute;
+    left: 605px;
   }
 
 body{
