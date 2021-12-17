@@ -14,7 +14,6 @@ let eatAppleSound = new sound("eatapple.mp3");
 let myMusic;
 myMusic = new sound("snakemusic.mp3");
 document.querySelector('audio').loop = true;
-myMusic.play();
 
 let snake = [
     { x: 200, y: 200 },
@@ -191,7 +190,9 @@ function newGame() {
         { x: 150, y: 200 }
     ]
     myMusic.play();
-    document.getElementById('gameover-text').remove();
+    if(document.getElementById('gameover-text')) {
+        document.getElementById('gameover-text').remove();
+    }
     score = 0;
     scoreBoard.innerHTML = `Score : ${score}`;
     food_x;
@@ -203,8 +204,7 @@ function newGame() {
     gen_food();
 }
 
-main();
-gen_food();
+
 document.addEventListener("keydown", change_direction);
 newGameButton.addEventListener("click", newGame);
 
