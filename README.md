@@ -1,3 +1,3 @@
 # Snake-Game
 
-<a href="https://github.com/Eizann/Snake-Game/deployments/activity_log?environment=github-pages"> Demo</a>
+<a href="https://eizann.github.io/Snake-Game/"> Demo</a>
