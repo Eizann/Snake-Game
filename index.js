@@ -14,7 +14,6 @@ let eatAppleSound = new sound("eatapple.mp3");
 let myMusic = new sound("snakemusic.mp3");
 myMusic.sound.loop = true;
 
-
 let snake = [
     { x: 200, y: 200 },
     { x: 190, y: 200 },
@@ -137,7 +136,6 @@ function gen_food() {
         if (has_eaten) gen_food();
     });
 }
-
 
 // Function to draw the food
 function drawFood() {
