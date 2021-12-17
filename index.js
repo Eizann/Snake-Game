@@ -11,9 +11,9 @@ headingElement.id = 'gameover-text';
 
 let gameOverSound = new sound("gameover.mp3");
 let eatAppleSound = new sound("eatapple.mp3");
-let myMusic;
-myMusic = new sound("snakemusic.mp3");
-document.querySelector('audio').loop = true;
+let myMusic = new sound("snakemusic.mp3");
+myMusic.sound.loop = true;
+
 
 let snake = [
     { x: 200, y: 200 },
@@ -189,8 +189,8 @@ function newGame() {
         { x: 160, y: 200 },
         { x: 150, y: 200 }
     ]
-    document.querySelector('audio').loop = true;
     myMusic.play();
+    document.querySelector('audio').loop = true;
     if(document.getElementById('gameover-text')) {
         document.getElementById('gameover-text').remove();
     }
